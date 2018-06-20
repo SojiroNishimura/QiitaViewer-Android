@@ -15,6 +15,14 @@ import kotlinx.android.synthetic.main.fragment_article_list.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class ArticleListFragment : Fragment() {
+    private val articleClickListener = object : ArticleListAdapter.ViewHolder.ArticleClickListener {
+        override fun onClick(article: Article) {
+            view?.let {
+                Navigation.findNavController(it).navigate(ArticleListFragmentDirections.toDetail().setUrl(article.url))
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -24,7 +32,7 @@ class ArticleListFragment : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_article_list, container, false)
         root.articleList.apply {
-            adapter = ArticleListAdapter()
+            adapter = ArticleListAdapter(articleClickListener = articleClickListener)
             layoutManager = LinearLayoutManager(context)
         }
         return root
@@ -42,7 +50,8 @@ class ArticleListFragment : Fragment() {
         }
     }
 
-    private class ArticleListAdapter(articles: List<Article> = listOf<Article>()) :
+    private class ArticleListAdapter(articles: List<Article> = listOf(),
+                                     private val articleClickListener: ViewHolder.ArticleClickListener) :
             RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
         var articles: List<Article> = articles
             set(value) {
@@ -50,11 +59,22 @@ class ArticleListFragment : Fragment() {
                 notifyDataSetChanged()
             }
 
-        private class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class ViewHolder(view: View, private val clickListener: ArticleClickListener) : RecyclerView.ViewHolder(view) {
+            /*
+            インタフェースの定義場所をFragment直下にするか悩ましいがリスナを直接使うのはViewHolderなので
+            ここに定義しておく
+            */
+            interface ArticleClickListener {
+                fun onClick(article: Article)
+            }
+
             fun bindItem(article: Article?) {
                 article?.let {
                     itemView.title.text = it.title
                     itemView.userName.text = it.user.name
+                    itemView.setOnClickListener {
+                        clickListener.onClick(article)
+                    }
                 }
             }
         }
@@ -62,7 +82,7 @@ class ArticleListFragment : Fragment() {
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): ArticleListAdapter.ViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-            return ViewHolder(view)
+            return ViewHolder(view, articleClickListener)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
