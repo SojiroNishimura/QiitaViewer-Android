@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
+import kotlinx.android.synthetic.main.fragment_article_detail.*
 
 class ArticleDetailFragment : Fragment() {
     val url: String by lazy {
@@ -19,5 +21,14 @@ class ArticleDetailFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_article_detail, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        webView?.let {
+            it.webViewClient = WebViewClient()
+            it.loadUrl(url)
+        }
     }
 }

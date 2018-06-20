@@ -5,11 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".ArticleDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Detail screen"
-        tools:text="Detail screen" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>
