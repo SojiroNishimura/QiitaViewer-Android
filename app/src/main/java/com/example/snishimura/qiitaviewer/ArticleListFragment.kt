@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.example.snishimura.qiitaviewer.api.requestArticles
 import kotlinx.android.synthetic.main.fragment_article_list.*
 
 class ArticleListFragment : Fragment() {
@@ -21,6 +22,10 @@ class ArticleListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        buttonRequestArticles.setOnClickListener {
+            requestArticles()
+        }
 
         button1.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_articleListFragment_to_articleDetailFragment)
