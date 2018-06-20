@@ -11,7 +11,7 @@
         android:label="fragment_article_list"
         tools:layout="@layout/fragment_article_list" >
         <action
-            android:id="@+id/action_articleListFragment_to_articleDetailFragment"
+            android:id="@+id/toDetail"
             app:destination="@id/articleDetailFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
@@ -20,5 +20,10 @@
         android:id="@+id/articleDetailFragment"
         android:name="com.example.snishimura.qiitaviewer.ArticleDetailFragment"
         android:label="fragment_article_detail"
-        tools:layout="@layout/fragment_article_detail" />
+        tools:layout="@layout/fragment_article_detail" >
+        <argument
+            android:name="url"
+            android:defaultValue='""'
+            app:type="string" />
+    </fragment>
 </navigation>

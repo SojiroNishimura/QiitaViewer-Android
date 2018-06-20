@@ -28,7 +28,7 @@ class ArticleListFragment : Fragment() {
         }
 
         button1.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_articleListFragment_to_articleDetailFragment)
+            Navigation.findNavController(it).navigate(ArticleListFragmentDirections.toDetail().setUrl("Test Url"))
         }
     }
 }
