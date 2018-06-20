@@ -42,4 +42,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+
+//    FIXME これを入れるとandroid.support.v4以下のクラスが重複して読み込まれるエラーが発生する
+//    exclude module: 'android.support.v4.*'等では解消できず
+//    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha3'
 }
