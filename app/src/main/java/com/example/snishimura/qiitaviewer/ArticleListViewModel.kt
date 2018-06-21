@@ -1,7 +1,6 @@
 package com.example.snishimura.qiitaviewer
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import com.example.snishimura.qiitaviewer.data.Article
 import com.example.snishimura.qiitaviewer.data.repository.ArticleRepository
@@ -20,7 +19,7 @@ class ArticleListViewModel : ViewModel() {
     val articles: LiveData<List<Article>>
         get() = _articles
 
-    fun requestArticles() {
-        articleRepository.requestArticles()
+    fun requestArticles(query: String = "") {
+        articleRepository.requestArticles(query)
     }
 }

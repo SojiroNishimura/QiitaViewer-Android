@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.navigation.Navigation
 import com.example.snishimura.qiitaviewer.data.Article
 import kotlinx.android.synthetic.main.fragment_article_list.*
@@ -48,15 +49,17 @@ class ArticleListFragment : Fragment() {
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        buttonRequestArticles.setOnClickListener {
-            articleListViewModel.requestArticles()
-        }
-
-        button1.setOnClickListener {
-            Navigation.findNavController(it).navigate(ArticleListFragmentDirections.toDetail().setUrl("Test Url"))
+        searchBox.setOnEditorActionListener { textView, actionId, keyEvent ->
+            /*
+            * (条件式).apply { lambda } とすると条件式の評価結果をラムダの戻り値にできるので
+            * Booleanを返す必要がある場合に簡潔に記述できる
+            * */
+            (actionId == EditorInfo.IME_ACTION_SEARCH).apply {
+                articleListViewModel.requestArticles(textView.text.toString())
+            }
         }
     }
 

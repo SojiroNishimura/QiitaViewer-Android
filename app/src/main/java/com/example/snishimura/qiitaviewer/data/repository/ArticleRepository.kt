@@ -33,8 +33,9 @@ class ArticleRepository {
         FuelManager.instance.basePath = baseUri
     }
 
-    fun requestArticles() {
-        Fuel.get("/items").response { request, response, result ->
+    fun requestArticles(query: String) {
+        val param = if (query.isNotEmpty()) listOf("query" to query) else emptyList()
+        Fuel.get("/items", param).response { request, response, result ->
             println("Requested URL ${request.url}")
             when (result) {
                 is Result.Success -> {
