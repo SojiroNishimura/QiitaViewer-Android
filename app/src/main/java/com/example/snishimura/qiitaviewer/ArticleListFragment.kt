@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.example.snishimura.qiitaviewer.api.requestArticles
 import com.example.snishimura.qiitaviewer.data.Article
 import kotlinx.android.synthetic.main.fragment_article_list.*
 import kotlinx.android.synthetic.main.fragment_article_list.view.*
@@ -53,7 +52,7 @@ class ArticleListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         buttonRequestArticles.setOnClickListener {
-            requestArticles()
+            articleListViewModel.requestArticles()
         }
 
         button1.setOnClickListener {

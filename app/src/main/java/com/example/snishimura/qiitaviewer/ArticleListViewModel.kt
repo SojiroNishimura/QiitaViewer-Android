@@ -1,16 +1,26 @@
 package com.example.snishimura.qiitaviewer
 
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import com.example.snishimura.qiitaviewer.data.Article
+import com.example.snishimura.qiitaviewer.data.repository.ArticleRepository
 
 class ArticleListViewModel : ViewModel() {
-    private val _articles: MutableLiveData<List<Article>> = MutableLiveData()
+    /*
+    * TODO できればRepositoryはDIした方がよい
+    * */
+    private val articleRepository: ArticleRepository = ArticleRepository()
+    private val _articles: LiveData<List<Article>> = articleRepository.articles
 
     /*
     * 直接的なデータ操作を禁止するためgetterでシャドウイングする
-    * 値の更新はLiveDataのsetValue or postValueを使う
+    * 値の更新はRepository側で行うためこのクラスでは変更を許可しない(=MutableLiveDataにしない)
     * */
-    val articles: MutableLiveData<List<Article>>
+    val articles: LiveData<List<Article>>
         get() = _articles
+
+    fun requestArticles() {
+        articleRepository.requestArticles()
+    }
 }
