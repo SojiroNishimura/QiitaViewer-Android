@@ -33,6 +33,13 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
+    /*
+    * androidx.lifecycle:lifecycle-extensions:$lifecycle_versionの方を使うとビルドできないので
+    * android.archを使う
+    * */
+    def lifecycle_version = "1.1.1"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
@@ -43,7 +50,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
 
-//    FIXME これを入れるとandroid.support.v4以下のクラスが重複して読み込まれるエラーが発生する
-//    exclude module: 'android.support.v4.*'等では解消できず
+    /*
+    * FIXME これを入れるとandroid.support.v4以下のクラスが重複して読み込まれるエラーが発生する
+    * exclude module: 'android.support.v4.*'等では解消できず
+    */
 //    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha3'
 }
