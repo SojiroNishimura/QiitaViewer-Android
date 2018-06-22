@@ -1,4 +1,4 @@
-package com.example.snishimura.qiitaviewer
+package com.example.snishimura.qiitaviewer.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.navigation.Navigation
+import com.example.snishimura.qiitaviewer.R
 import com.example.snishimura.qiitaviewer.data.Article
 import kotlinx.android.synthetic.main.fragment_article_list.*
 import kotlinx.android.synthetic.main.fragment_article_list.view.*
@@ -91,7 +92,7 @@ class ArticleListFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): ArticleListAdapter.ViewHolder {
+                                        viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
             return ViewHolder(view, articleClickListener)
         }

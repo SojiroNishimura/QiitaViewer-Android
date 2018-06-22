@@ -1,4 +1,4 @@
-package com.example.snishimura.qiitaviewer
+package com.example.snishimura.qiitaviewer.ui
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
