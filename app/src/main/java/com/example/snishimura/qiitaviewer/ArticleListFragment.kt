@@ -40,7 +40,6 @@ class ArticleListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_article_list, container, false)
         root.articleList.apply {
             adapter = articleListAdapter

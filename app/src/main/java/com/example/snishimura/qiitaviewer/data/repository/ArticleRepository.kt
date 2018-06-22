@@ -38,12 +38,8 @@ class ArticleRepository {
         Fuel.get("/items", param).response { request, response, result ->
             println("Requested URL ${request.url}")
             when (result) {
-                is Result.Success -> {
-                    articles.postValue(parseArticles(String(response.data)))
-                }
-                is Result.Failure -> {
-                    println(result.getException())
-                }
+                is Result.Success -> articles.postValue(parseArticles(String(response.data)))
+                is Result.Failure -> println(result.getException())
             }
         }
     }
@@ -56,7 +52,7 @@ class ArticleRepository {
             articlesAdapter.fromJson(jsonStr) ?: emptyList()
         } catch (e: IOException) {
             e.printStackTrace()
-            return emptyList()
+            emptyList()
         }
     }
 }
