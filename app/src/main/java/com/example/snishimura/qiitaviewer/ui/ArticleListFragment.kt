@@ -73,9 +73,6 @@ class ArticleListFragment : Fragment() {
             }
 
         class ViewHolder(view: View, private val clickListener: ArticleClickListener) : RecyclerView.ViewHolder(view) {
-            /*
-            * インタフェースの定義場所をFragment直下にするか悩ましいがリスナを直接使うのはViewHolderなのでここに定義しておく
-            * */
             interface ArticleClickListener {
                 fun onClick(article: Article)
             }
